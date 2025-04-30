@@ -130,6 +130,51 @@ VALUES(1, 'test', '5599999999999', 'test@email.com');
 INSERT INTO usuarios_credencial(nome, email, usuario, senha, tipo, data)
 VALUES('administrador', 'administrador@admin.com', 'admin', MD5('admin'), '1', CURDATE());
 
+
+--- nova atualização
+
+-- DELETAR BANCO DE DADOS
+DROP DATABASE image_db;
+-- CRIAR BANCO DE DADOS
+CREATE DATABASE image_db;
+
+-- USAR O BANCO DE DADOS
+USE image_db;
+
+-- CRIAR TABELA LOGIN
+CREATE TABLE IF NOT EXISTS login(
+	id int(11) NOT NULL AUTO_INCREMENT,
+	nickname VARCHAR(150) UNIQUE NOT NULL,
+	email VARCHAR(255) UNIQUE NOT NULL,
+	pass VARCHAR(255) NOT NULL,
+	nivel CHAR(10) NOT NULL,
+	data_publicacao TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+	PRIMARY KEY(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS  users(
+	id int(11) NOT NULL,
+	nome VARCHAR(255) NOT NULL,
+	matricula VARCHAR(32) UNIQUE NOT NULL,
+	phone VARCHAR(15) UNIQUE NOT NULL,
+	email VARCHAR(255) UNIQUE NOT NULL,
+	status TINYINT(1) NOT NULL,
+	categoria VARCHAR(150) NOT NULL,
+	PRIMARY KEY(id)
+);
+
+-- CRIAR TABELA PARA SALVAR AS IMAGENS
+CREATE TABLE IF NOT EXISTS imagem(
+	id int(11) NOT NULL AUTO_INCREMENT,
+	image_user longblob  NOT NULL,
+	id_users int(11) UNIQUE NOT NULL,
+	FOREIGN KEY(id_users) REFERENCES users(id),
+	PRIMARY KEY(id)
+);
+
+
+
 ```
 ## Como você usará a classe DatabaseConnect.py para conectar a banco de dados.
 Porfavor, verifque o script mysql.py e escreva as suas credenciais para conectar a base de dados sem muita dificuldade.
