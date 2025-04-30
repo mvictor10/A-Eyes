@@ -1,0 +1,12 @@
+pip
+setuptools
+opencv-python==4.9.0.80
+flask
+numpy==1.26.3
+face_recognition
+dlib
+mysql-connector-python
+pyserial
+requests
+fastapi
+uvicorn
